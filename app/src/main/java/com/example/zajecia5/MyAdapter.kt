@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class MyAdapter (
-    private val data : List<MyAnimal>,
+    private val data : MutableList<MyAnimal>,
     private val onItemClick : (String) -> Unit
 ) : RecyclerView.Adapter <MyAdapter.MyViewHolder> () {
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int ): MyViewHolder {
@@ -33,5 +33,11 @@ class MyAdapter (
     inner class MyViewHolder (view : View) : RecyclerView.ViewHolder(view) {
         val myRowName : TextView = view.findViewById<TextView>(R.id.myRowNameTextView)
         val myRowDescription : TextView = view.findViewById<TextView>(R.id.myRowDescriptionTextView)
+    }
+
+    fun updateList(newData: List<MyAnimal>) {
+        data.clear()
+        data.addAll(newData)
+        notifyDataSetChanged()
     }
 }
